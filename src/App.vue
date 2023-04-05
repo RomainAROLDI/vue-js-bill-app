@@ -1,11 +1,12 @@
 <template>
     <div class="container-fluid">
         <header class="d-flex flex-wrap justify-content-between py-3 px-4 mb-4 border-bottom">
-            <a href="#"
-               class="d-flex align-items-center gap-2 mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none text-primary">
-                <i class="fa-solid fa-wallet fa-2x"/>
-                <span class="fs-3">Factures</span>
-            </a>
+            <RouterLink
+                    to="/"
+                    class="d-flex align-items-center gap-2 mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none text-primary"
+            >
+                <i class="fa-solid fa-wallet fa-2x"/><span class="fs-3">Factures</span>
+            </RouterLink>
             <ul class="nav nav-pills gap-2">
                 <li class="nav-item">
                     <RouterLink :to="{ name: 'home' }" class="nav-link" exact-active-class="active"
