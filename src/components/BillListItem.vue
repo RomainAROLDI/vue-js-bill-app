@@ -3,6 +3,7 @@
         <td>{{ bill.id }}</td>
         <td>{{ bill.date }}</td>
         <td>{{ bill.description }}</td>
+        <td>{{ bill.billnum }}</td>
         <td>{{ bill.client.firstName }} {{ bill.client.lastName }} ({{ bill.client.companyName }})</td>
         <td>{{ bill.totalHT.toFixed(2).replace('.', ',') }} € HT</td>
         <td>{{ bill.totalTTC.toFixed(2).replace('.', ',') }} € TTC</td>
