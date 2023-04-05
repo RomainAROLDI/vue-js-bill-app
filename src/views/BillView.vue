@@ -11,7 +11,7 @@
                         size="sm"
                         variant="outline-danger"
                         icon-left="trash"
-                        @click="deleteBill()"
+                        @click="onDeleteBill()"
                 >
                     Supprimer
                 </BButton>
@@ -194,7 +194,7 @@
 
             <div class="row">
                 <div class="col text-end">
-                    <b-button @click="saveBill(bill)" icon-right="fas fa-floppy-disk" class="text-white">
+                    <b-button @click="onSaveBill()" icon-right="fas fa-floppy-disk" class="text-white">
                         {{ isNewBill ? 'Enregistrer' : 'Modifier' }}
                     </b-button>
                 </div>
@@ -267,6 +267,18 @@ export default {
         },
         onDeletePrestation(index) {
             this.bill.prestations.splice(index, 1);
+        },
+        onDeleteBill() {
+            this.deleteBill(this.id);
+            this.$router.push({ name: 'home' });
+        },
+        onSaveBill() {
+            this.saveBill({
+                ...this.bill,
+                totalHT: this.totalHT,
+                totalTTC: this.totalTTC
+            });
+            this.$router.push({ name: 'home' });
         }
     },
     mounted() {
