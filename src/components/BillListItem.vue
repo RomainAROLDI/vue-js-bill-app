@@ -1,5 +1,5 @@
 <template>
-    <tr>
+    <tr class="align-middle">
         <td>{{ bill.id }}</td>
         <td>{{ bill.date }}</td>
         <td>{{ bill.description }}</td>
