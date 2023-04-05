@@ -27,7 +27,7 @@
             <RouterView/>
         </main>
 
-        <footer class="py-3 my-4 border-top text-center">
+        <footer class="py-3 mt-5 border-top text-center">
             <span class="mb-3 mb-md-0 text-body-secondary">© {{ currentYear }} Factures.app</span>
         </footer>
     </div>

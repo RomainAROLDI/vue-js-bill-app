@@ -2,7 +2,9 @@
     <main>
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1><i class="fa-solid fa-chevron-down me-2"/>Liste des factures</h1>
-            <BButton variant="outline-info" iconLeft="circle-plus">Créer une facture</BButton>
+            <BButton :to="{ name: 'bill', params: { id: -1 } }" variant="outline-info" iconLeft="circle-plus">Créer une
+                facture
+            </BButton>
         </div>
         <p v-if="!bills || !bills.length" class="text-primary my-5">Aucune facture pour l'instant.</p>
         <BillList v-else>
@@ -145,6 +147,10 @@ export default {
         // méthode appelée lorsque le composant enfant envoie
         // l'évémenent onEditBill
         editBill(id) {
+            this.$router.push({
+                name: 'bill',
+                params: {id}
+            })
             console.log('edit bill with id : ', id)
         }
     }

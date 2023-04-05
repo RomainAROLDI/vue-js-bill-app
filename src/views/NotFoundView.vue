@@ -3,7 +3,7 @@
         <h1>Erreur 404</h1>
         <p>Cette page n'existe pas ou a été déplacée.</p>
 
-        <BButton to="/" icon-left="angle-left">Accueil</BButton>
+        <BButton class="text-white" to="/" icon-left="angle-left">Accueil</BButton>
     </div>
 </template>
 
