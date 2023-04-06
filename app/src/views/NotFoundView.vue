@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import BButton from "@/components/BButton.vue";
+import BButton from "../components/BButton.vue";
 
 export default {
     components: {BButton}

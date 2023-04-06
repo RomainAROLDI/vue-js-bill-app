@@ -24,11 +24,11 @@
 </template>
 
 <script>
-import BillList from '@/components/BillList.vue'
-import BillListItem from '@/components/BillListItem.vue'
-import BButton from "@/components/BButton.vue";
+import BillList from '../components/BillList.vue'
+import BillListItem from '../components/BillListItem.vue'
+import BButton from "../components/BButton.vue";
 import {mapState, mapActions} from "pinia";
-import {useBillStore} from "@/stores/bill";
+import {useBillStore} from "../stores/bill";
 
 export default {
     components: {

@@ -1,4 +1,4 @@
-import prestationInterface from "@/interfaces/prestationInterface";
+import prestationInterface from "./prestationInterface";
 
 const date = new Date().toLocaleDateString('fr-FR', {
     day: 'numeric',

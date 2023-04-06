@@ -1,5 +1,5 @@
 import {defineStore} from "pinia";
-import billInterface from "@/interfaces/billInterface";
+import billInterface from "../interfaces/billInterface";
 import cloneDeep from "lodash.clonedeep";
 
 const useBillStore = defineStore('bill', {

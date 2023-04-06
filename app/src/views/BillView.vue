@@ -208,11 +208,11 @@
 </template>
 
 <script>
-import {clientOptions} from '@/libs/clientOptions'
-import BButton from "@/components/BButton.vue";
-import prestationInterface from "@/interfaces/prestationInterface.js";
+import {clientOptions} from '../libs/clientOptions'
+import BButton from "../components/BButton.vue";
+import prestationInterface from "../interfaces/prestationInterface.js";
 import {mapWritableState, mapActions} from "pinia";
-import {useBillStore} from "@/stores/bill";
+import {useBillStore} from "../stores/bill";
 
 export default {
     components: {BButton},
