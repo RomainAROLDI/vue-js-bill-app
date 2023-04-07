@@ -45,7 +45,11 @@
                     <div class="mb-3 row">
                         <label for="date" class="col-sm-4 col-form-label">Émise le:</label>
                         <div class="col-sm-8">
-                            <input v-model="bill.date" class="form-control" id="date"/>
+                            <input
+                                    type="date"
+                                    :value="formatDate(bill.date)"
+                                    @input="bill.date = $event.target.value"
+                                    class="form-control" id="date"/>
                         </div>
                     </div>
                 </div>
@@ -61,13 +65,13 @@
                                     v-model="bill.client"
                                     id="client"
                             >
-                                <option selected>Choisir</option>
                                 <option
-                                        v-for="option in clientOptions"
-                                        :key="option.value.idclient"
-                                        :value="option.value"
+                                        v-if="customers"
+                                        v-for="customer in customers"
+                                        :key="customer._id"
+                                        :value="customer"
                                 >
-                                    {{ option.label }}
+                                    {{ customer.firstname + ' ' + customer.lastname }}
                                 </option>
                             </select>
                         </div>
@@ -200,19 +204,15 @@
                 </div>
             </div>
         </section>
-
-        <pre class="card p-2" v-if="debug">
-            {{ bill }}
-        </pre>
     </div>
 </template>
 
 <script>
-import {clientOptions} from '@/libs/clientOptions'
 import BButton from "../components/BButton.vue";
 import prestationInterface from "../interfaces/prestationInterface.js";
 import {mapState, mapActions} from "pinia";
 import {useBillStore} from "@/stores/bill";
+import {useCustomerStore} from "@/stores/customer";
 
 export default {
     components: {BButton},
@@ -223,13 +223,11 @@ export default {
         }
     },
     data() {
-        return {
-            debug: false,
-            clientOptions
-        }
+        return {}
     },
     computed: {
         ...mapState(useBillStore, ['bill']),
+        ...mapState(useCustomerStore, ['customers']),
         isNewBill() {
             return !this.id || this.id < 0;
         },
@@ -259,14 +257,19 @@ export default {
         } else {
             await this.getBill(this.id);
         }
+        await this.getAllCustomers();
     },
     methods: {
         ...mapActions(useBillStore, ['createBill', 'getBill', 'saveBill', 'deleteBill']),
+        ...mapActions(useCustomerStore, ['getAllCustomers']),
         formatPrice(price, suffix = "") {
             if (price % 1 === 0) {
                 return price + "  € " + suffix;
             }
             return price.toFixed(2).replace(".", ",") + "  € " + suffix;
+        },
+        formatDate(date) {
+            return new Date(date).toISOString().split('T')[0];
         },
         onAddPrestation() {
             this.bill.prestations.push({

@@ -3,7 +3,7 @@
         <td>{{ bill.date }}</td>
         <td>{{ bill.description }}</td>
         <td>{{ bill.billnum }}</td>
-        <td>{{ bill.client.firstName }} {{ bill.client.lastName }} ({{ bill.client.companyName }})</td>
+        <td>{{ bill.client.firstname }} {{ bill.client.lastname }} <span v-if="bill.client.company">({{ bill.client.company }})</span></td>
         <td>{{ bill.totalHT.toFixed(2).replace('.', ',') }} € HT</td>
         <td class="fw-bold">{{ bill.totalTTC.toFixed(2).replace('.', ',') }} € TTC</td>
         <td>
