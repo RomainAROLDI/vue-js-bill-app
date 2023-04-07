@@ -19,7 +19,7 @@ Puis, installez les dépendances :
 Avant de lancer l'application, il est fortement recommandé de démarrer l'API. Pour plus
 d'informations, je vous invite à lire le fichier `README.md` du projet **api**.
 
-Une le serveur de l'API lancé et opérationnel, utilisez la commande ci-dessous pour lancer l'application en mode de développement :
+Une fois le serveur de l'API lancé et opérationnel, utilisez la commande ci-dessous pour lancer l'application en mode de développement :
 
 `npm run dev`
 
