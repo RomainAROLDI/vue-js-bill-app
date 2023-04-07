@@ -33,6 +33,18 @@ Cette API propose les endpoints suivants :
 ### /bills
 
 * **GET /bills** : Renvoie toutes les factures
+* **GET /bills/{id}** : Renvoie la facture identifiée par son id
+* **POST /bills** : Créer une nouvelle facture
+* **PATCH /bills/{id}** : Met à jour une facture
+* **DELETE /bills/{id}** : Supprime une facture
+
+### /customers
+
+* **GET /customers** : Renvoie tous les clients
+* **GET /customers/{id}** : Renvoie le client identifié par son id
+* **POST /customers** : Créer un nouveau client
+* **PATCH /customers/{id}** : Met à jour un client
+* **DELETE /customers/{id}** : Supprime un client
 
 ## Modules utilisés
 
