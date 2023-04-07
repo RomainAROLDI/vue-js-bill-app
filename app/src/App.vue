@@ -16,6 +16,20 @@
                     </RouterLink>
                 </li>
                 <li class="nav-item">
+                    <RouterLink :to="{ name: 'bills' }" class="nav-link" exact-active-class="active"
+                                active-class="active">
+                        <i class="fa-solid fa-wallet me-2"/>
+                        Factures
+                    </RouterLink>
+                </li>
+                <li class="nav-item">
+                    <RouterLink :to="{ name: 'customers' }" class="nav-link" exact-active-class="active"
+                                active-class="active">
+                        <i class="fa-solid fa-users me-2"/>
+                        Clients
+                    </RouterLink>
+                </li>
+                <li class="nav-item">
                     <RouterLink :to="{ name: 'about' }" class="nav-link" exact-active-class="active"
                                 active-class="active">
                         A propos

@@ -15,10 +15,28 @@ const router = createRouter({
             component: () => import('../views/AboutView.vue')
         },
         {
+            path: '/bills',
+            name: 'bills',
+            props: true,
+            component: () => import('../views/BillsView.vue')
+        },
+        {
             path: '/bill/:id',
             name: 'bill',
             props: true,
             component: () => import('../views/BillView.vue')
+        },
+        {
+            path: '/customers',
+            name: 'customers',
+            props: true,
+            component: () => import('../views/CustomersView.vue')
+        },
+        {
+            path: '/customer/:id',
+            name: 'customer',
+            props: true,
+            component: () => import('../views/CustomerView.vue')
         },
         {
             path: '/:pathMatch(.*)*',

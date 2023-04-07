@@ -15,7 +15,7 @@
                 >
                     Supprimer
                 </BButton>
-                <BButton to="/" size="sm" variant="outline-secondary" icon-left="angle-left">
+                <BButton to="/bills" size="sm" variant="outline-secondary" icon-left="angle-left">
                     Annuler
                 </BButton>
             </div>
@@ -117,7 +117,7 @@
                     <td class="col-2"><input v-model="prestation.price" class="form-control text-end"/></td>
                     <td class="col-2">
                         <input
-                                :value="prestation.qty * prestation.price"
+                                :value="formatPrice(prestation.qty * prestation.price)"
                                 disabled
                                 class="form-control text-end"
                         />
@@ -279,7 +279,7 @@ export default {
         },
         onDeleteBill() {
             this.deleteBill(this.id);
-            this.$router.push('/');
+            this.$router.push('/bills');
         },
         async onSaveBill() {
             await this.saveBill({
@@ -287,7 +287,7 @@ export default {
                 totalHT: this.totalHT,
                 totalTTC: this.totalTTC
             });
-            this.$router.push('/');
+            this.$router.push('/bills');
         }
     }
 }

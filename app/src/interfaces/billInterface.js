@@ -1,10 +1,6 @@
 import prestationInterface from "./prestationInterface";
 
-const date = new Date().toLocaleDateString('fr-FR', {
-    day: 'numeric',
-    month: 'numeric',
-    year: 'numeric'
-});
+const date = new Date().toISOString().split('T')[0];
 
 export default {
     id: -1,

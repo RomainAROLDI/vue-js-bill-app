@@ -1,63 +1,32 @@
 <template>
     <main>
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1><i class="fa-solid fa-chevron-down me-2"/>Liste des factures</h1>
-            <BButton :to="{ name: 'bill', params: { id: -1 } }" variant="outline-info" iconLeft="circle-plus">
-                Créer une facture
-            </BButton>
+            <h1><i class="fa-solid fa-chevron-down me-2"/>Dashboard</h1>
+            <div>
+                <BButton
+                        :to="{ name: 'customer', params: { id: -1 } }"
+                        size="sm" variant="outline-info"
+                        iconLeft="circle-plus"
+                        class="me-3"
+                >
+                    Créer un client
+                </BButton>
+                <BButton
+                        :to="{ name: 'bill', params: { id: -1 } }"
+                        size="sm" variant="outline-info"
+                        iconLeft="circle-plus"
+                >
+                    Créer une facture
+                </BButton>
+            </div>
         </div>
-        <p v-if="!bills || !bills.length" class="text-primary my-5">Aucune facture pour l'instant.</p>
-        <BillList v-else>
-            <BillListItem
-                    v-for="bill in bills"
-                    :key="bill._id"
-                    :bill="bill"
-                    @onDeleteBill="onDeleteBill($event)"
-                    @onEditBill="editBill($event)"
-            />
-        </BillList>
-
-        <p class="text-center text-muted">
-            {{ totalBills }} facture<span v-if="totalBills > 1">s</span>
-        </p>
     </main>
 </template>
 
 <script>
-import BillList from '../components/BillList.vue'
-import BillListItem from '../components/BillListItem.vue'
-import BButton from "../components/BButton.vue";
-import {mapState, mapActions} from "pinia";
-import {useBillStore} from "@/stores/bill";
+import BButton from "@/components/BButton.vue";
 
 export default {
-    components: {
-        BButton,
-        BillList,
-        BillListItem
-    },
-    computed: {
-        ...mapState(useBillStore, ['bills', 'totalBills'])
-    },
-    methods: {
-        ...mapActions(useBillStore, ['getAllBills', 'deleteBill']),
-
-        // méthode appelée lorsque le composant enfant envoie
-        // l'évémenent onEditBill
-        editBill(id) {
-            this.$router.push({
-                name: 'bill',
-                params: {id}
-            });
-            console.log('edit bill with id : ', id);
-        },
-        onDeleteBill(id) {
-            this.deleteBill(id);
-            this.$router.push('/');
-        }
-    },
-    mounted() {
-        this.getAllBills();
-    }
+    components: {BButton}
 }
 </script>
