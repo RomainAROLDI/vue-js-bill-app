@@ -15,6 +15,7 @@ mongoose.connect(`mongodb+srv://${dbUser}:${dbPass}@${dbCluster}/?retryWrites=tr
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const billsRoutes = require('./routes/bills');
+const customersRoutes = require('./routes/customers');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(cors({
 }));
 
 app.use('/bills', billsRoutes);
+app.use('/customers', customersRoutes);
 
 app.get('/', (req, res) => {
     res.json({
