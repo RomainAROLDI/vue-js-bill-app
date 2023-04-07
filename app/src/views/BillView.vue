@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <section v-if="bill && bill.id">
+        <section v-if="bill">
             <div class="row justify-content-between">
                 <div class="col-md-6 col-lg-5">
                     <div class="mb-3 row">
@@ -61,7 +61,7 @@
                                     v-model="bill.client"
                                     id="client"
                             >
-                                <option>Choisir</option>
+                                <option selected>Choisir</option>
                                 <option
                                         v-for="option in clientOptions"
                                         :key="option.value.idclient"
@@ -202,17 +202,17 @@
         </section>
 
         <pre class="card p-2" v-if="debug">
-      {{ bill }}
-    </pre>
+            {{ bill }}
+        </pre>
     </div>
 </template>
 
 <script>
-import {clientOptions} from '../libs/clientOptions'
+import {clientOptions} from '@/libs/clientOptions'
 import BButton from "../components/BButton.vue";
 import prestationInterface from "../interfaces/prestationInterface.js";
-import {mapWritableState, mapActions} from "pinia";
-import {useBillStore} from "../stores/bill";
+import {mapState, mapActions} from "pinia";
+import {useBillStore} from "@/stores/bill";
 
 export default {
     components: {BButton},
@@ -229,14 +229,13 @@ export default {
         }
     },
     computed: {
-        ...mapWritableState(useBillStore, ['bill']),
-        // est-ce une nouvelle facture ? ou est-on en train de modifier une facture enregistrée ?
+        ...mapState(useBillStore, ['bill']),
         isNewBill() {
-            return !this.id || this.id < 0
+            return !this.id || this.id < 0;
         },
         totalHT() {
             let total = 0;
-            if (this.bill.prestations.length) {
+            if (this.bill.prestations && this.bill.prestations.length) {
                 for (const prestation of this.bill.prestations) {
                     total += prestation.qty * prestation.price;
                 }
@@ -254,8 +253,15 @@ export default {
             return this.totalTTC - this.bill.paid;
         }
     },
+    async mounted() {
+        if (this.isNewBill) {
+            await this.createBill();
+        } else {
+            await this.getBill(this.id);
+        }
+    },
     methods: {
-        ...mapActions(useBillStore, ['createBill', 'updateBill', 'saveBill', 'deleteBill']),
+        ...mapActions(useBillStore, ['createBill', 'getBill', 'saveBill', 'deleteBill']),
         formatPrice(price, suffix = "") {
             if (price % 1 === 0) {
                 return price + "  € " + suffix;
@@ -263,29 +269,25 @@ export default {
             return price.toFixed(2).replace(".", ",") + "  € " + suffix;
         },
         onAddPrestation() {
-            this.bill.prestations.push({...prestationInterface, description: 'Description par défaut'});
+            this.bill.prestations.push({
+                ...prestationInterface,
+                description: 'Description par défaut'
+            });
         },
         onDeletePrestation(index) {
             this.bill.prestations.splice(index, 1);
         },
         onDeleteBill() {
             this.deleteBill(this.id);
-            this.$router.push({ name: 'home' });
+            this.$router.push('/');
         },
-        onSaveBill() {
-            this.saveBill({
+        async onSaveBill() {
+            await this.saveBill({
                 ...this.bill,
                 totalHT: this.totalHT,
                 totalTTC: this.totalTTC
             });
-            this.$router.push({ name: 'home' });
-        }
-    },
-    mounted() {
-        if (this.isNewBill) {
-            this.createBill();
-        } else {
-            this.updateBill(this.id);
+            this.$router.push('/');
         }
     }
 }

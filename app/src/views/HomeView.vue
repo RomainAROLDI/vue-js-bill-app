@@ -2,17 +2,17 @@
     <main>
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1><i class="fa-solid fa-chevron-down me-2"/>Liste des factures</h1>
-            <BButton :to="{ name: 'bill', params: { id: -1 } }" variant="outline-info" iconLeft="circle-plus">Créer une
-                facture
+            <BButton :to="{ name: 'bill', params: { id: -1 } }" variant="outline-info" iconLeft="circle-plus">
+                Créer une facture
             </BButton>
         </div>
         <p v-if="!bills || !bills.length" class="text-primary my-5">Aucune facture pour l'instant.</p>
         <BillList v-else>
             <BillListItem
                     v-for="bill in bills"
-                    :key="bill.id"
+                    :key="bill._id"
                     :bill="bill"
-                    @onDeleteBill="deleteBill($event)"
+                    @onDeleteBill="onDeleteBill($event)"
                     @onEditBill="editBill($event)"
             />
         </BillList>
@@ -28,7 +28,7 @@ import BillList from '../components/BillList.vue'
 import BillListItem from '../components/BillListItem.vue'
 import BButton from "../components/BButton.vue";
 import {mapState, mapActions} from "pinia";
-import {useBillStore} from "../stores/bill";
+import {useBillStore} from "@/stores/bill";
 
 export default {
     components: {
@@ -40,7 +40,7 @@ export default {
         ...mapState(useBillStore, ['bills', 'totalBills'])
     },
     methods: {
-        ...mapActions(useBillStore, ['deleteBill']),
+        ...mapActions(useBillStore, ['getAllBills', 'deleteBill']),
 
         // méthode appelée lorsque le composant enfant envoie
         // l'évémenent onEditBill
@@ -50,7 +50,14 @@ export default {
                 params: {id}
             });
             console.log('edit bill with id : ', id);
+        },
+        onDeleteBill(id) {
+            this.deleteBill(id);
+            this.$router.push('/');
         }
+    },
+    mounted() {
+        this.getAllBills();
     }
 }
 </script>

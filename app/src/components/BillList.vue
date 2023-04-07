@@ -3,7 +3,6 @@
         <thead>
             <slot name="head">
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Date</th>
                     <th scope="col">Description</th>
                     <th scope="col">Numéro</th>

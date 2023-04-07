@@ -1,10 +1,8 @@
 require('dotenv').config();
-const http = require('http');
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-const hostname = '127.0.0.1';
 const port = process.env.PORT;
 const dbUser = process.env.DB_USER;
 const dbPass = process.env.DB_PASS;
@@ -17,14 +15,13 @@ mongoose.connect(`mongodb+srv://${dbUser}:${dbPass}@${dbCluster}/?retryWrites=tr
     .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const billsRoutes = require('./routes/bills');
-const {mongo} = require("mongoose");
 
 const app = express();
 
 app.use(express.json());
 
 app.use(cors({
-    origin: hostname + ':5173'
+    origin: '*'
 }));
 
 app.use('/bills', billsRoutes);
