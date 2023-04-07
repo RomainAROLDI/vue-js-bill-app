@@ -15,10 +15,12 @@ Puis, installez les dépendances :
 
 ## Utilisation
 
-Avant de pouvoir lancer le serveur, il est nécessaire d'initialiser la
-variable d'environnement `PORT` dans un fichier `.env` situé à la racine du projet.
+Avant de pouvoir lancer le serveur, il est nécessaire d'initialiser les
+variables d'environnements. Un fichier `.env.sample` a été créé pour vous faciliter la tâche, 
+il vous suffit de copier-coller ce fichier, le renommer `.env` et de modifier la valeur des
+variables par vos informations. Veillez à ce que le fichier `.env` est bien situé à la racine du projet **api**.
 
-Une fois la variable initialisée, utilisez la commande ci-dessous pour lancer le serveur en mode de développement :
+Une fois les variables d'environnements initialisées, utilisez la commande ci-dessous pour lancer le serveur en mode de développement :
 
 `npm run dev`
 
@@ -45,4 +47,4 @@ Les modules suivants ont été utilisés dans ce projet :
 
 ## Auteur
 
-Ce projet a été créé par **Romain AROLDI** pour l'évaluation du module JavaScript 2 - MVC enseigné par Jérôme POSLEDNIK.
+Ce projet a été créé par **Romain AROLDI** pour l'évaluation du module JavaScript 2 enseigné par **Jérôme POSLEDNIK**.
